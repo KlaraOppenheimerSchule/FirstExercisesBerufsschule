@@ -10,22 +10,29 @@ public class First {
     private static final byte LITER_BEFORE_SALE = 100;
 
     public static void main(String[] Args) {
+        System.out.println("You have to pay: " + (float)getPrice() + "€");
+    }
+
+    public static double getPrice() {
         Scanner scanner = new Scanner(System.in);
         double priceToPay = 0;
         int operationNumber = 0;
         double literAmount = 0;
 
-        try {
-            System.out.print("Do you want to pay for Diezel(1), Super E5(2) or Super E10 (3): ");
-            operationNumber = scanner.nextInt();
+        while (true) {
+            try {
+                System.out.print("Do you want to pay for Diezel(1), Super E5(2) or Super E10 (3): ");
+                operationNumber = scanner.nextInt();
 
-            System.out.print("How much liter: ");
-            literAmount = scanner.nextDouble();
-        } catch (Exception e) {
-            System.out.println("Something went wrong");
-            System.exit(0);
+                System.out.print("How much liter: ");
+                literAmount = scanner.nextDouble();
+                break;
+            } catch (Exception e) {
+                System.out.println("Something went wrong");
+                scanner.next();
+            }
+
         }
-
         if (operationNumber == 1) {
             priceToPay = literAmount * PRICE_DIESEL;
         } else if (operationNumber == 2) {
@@ -41,6 +48,6 @@ public class First {
             priceToPay *= PERCENT_SALE;
         }
 
-        System.out.println("You have to pay: " + (float)priceToPay + "€");
+        return priceToPay;
     }
 }
